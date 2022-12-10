@@ -4,5 +4,13 @@ module.exports = {
   theme: {
     extend: {},
   },
-  plugins: [require("daisyui")],
+  plugins: [require('@tailwindcss/forms'), require('daisyui')],
+  darkMode: 'class',
+  daisyui: {
+    themes: [
+      'light',
+      // 'dark',
+      // 'coffee',
+    ],
+  },
 }

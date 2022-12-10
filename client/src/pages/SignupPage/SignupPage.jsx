@@ -1,24 +1,24 @@
-import "./SignupPage.css";
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import authService from "../../services/auth.service";
+import './SignupPage.css'
+import { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import authService from '../../services/auth.service'
 
 function SignupPage() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
-  const [errorMessage, setErrorMessage] = useState(undefined);
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [name, setName] = useState('')
+  const [errorMessage, setErrorMessage] = useState(undefined)
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
-  const handleEmail = (e) => setEmail(e.target.value);
-  const handlePassword = (e) => setPassword(e.target.value);
-  const handleName = (e) => setName(e.target.value);
+  const handleEmail = (e) => setEmail(e.target.value)
+  const handlePassword = (e) => setPassword(e.target.value)
+  const handleName = (e) => setName(e.target.value)
 
   const handleSignupSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault()
     // Create an object representing the request body
-    const requestBody = { email, password, name };
+    const requestBody = { email, password, name }
 
     // Send a request to the server using axios
     /* 
@@ -36,43 +36,70 @@ function SignupPage() {
       .signup(requestBody)
       .then((response) => {
         // If the POST request is successful redirect to the login page
-        navigate("/login");
+        navigate('/login')
       })
       .catch((error) => {
         // If the request resolves with an error, set the error message in the state
-        const errorDescription = error.response.data.message;
-        setErrorMessage(errorDescription);
-      });
-  };
+        const errorDescription = error.response.data.message
+        setErrorMessage(errorDescription)
+      })
+  }
 
   return (
-    <div className="SignupPage">
-      <h1>Sign Up</h1>
+    <div className="flex justify-center items-center h-screen">
+      <div className=" form-control w-full max-w-xs">
+        <h1>Sign Up</h1>
 
-      <form onSubmit={handleSignupSubmit}>
-        <label>Email:</label>
-        <input type="email" name="email" value={email} onChange={handleEmail} />
+        <form onSubmit={handleSignupSubmit}>
+          <label className="label">
+            <span className="label-text">Email:</span>
+          </label>
+          <input
+            type="email"
+            name="email"
+            value={email}
+            onChange={handleEmail}
+            className="input input-bordered w-full max-w-xs"
+          />
 
-        <label>Password:</label>
-        <input
-          type="password"
-          name="password"
-          value={password}
-          onChange={handlePassword}
-        />
+          <label className="label">
+            <span className="label-text">Password:</span>
+          </label>
+          <input
+            type="password"
+            name="password"
+            value={password}
+            onChange={handlePassword}
+            className="input input-bordered w-full max-w-xs"
+          />
 
-        <label>Name:</label>
-        <input type="text" name="name" value={name} onChange={handleName} />
+          <label className="label">
+            <span className="label-text">Name:</span>
+          </label>
+          <input
+            type="text"
+            name="name"
+            value={name}
+            onChange={handleName}
+            className="input input-bordered w-full max-w-xs"
+          />
 
-        <button type="submit">Sign Up</button>
-      </form>
+          <div className="pt-6">
+            <button type="submit" className="btn btn-success btn-block">
+              Sign Up
+            </button>
+          </div>
+        </form>
+        <div className="divider">or</div>
 
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
+        <Link className="btn btn-outline btn-primary btn-block" to={'/login'}>
+          Login
+        </Link>
+      </div>
 
-      <p>Already have account?</p>
-      <Link to={"/login"}> Login</Link>
+      {errorMessage && <p className="alert shadow-lg">{errorMessage}</p>}
     </div>
-  );
+  )
 }
 
-export default SignupPage;
+export default SignupPage
