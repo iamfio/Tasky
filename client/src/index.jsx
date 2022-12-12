@@ -13,6 +13,10 @@ import IsAnon from './components/IsAnon/IsAnon'
 import { AuthProviderWrapper } from './context/auth.context'
 import './index.css'
 import TasksPage from './pages/TasksPage/TasksPage'
+import TaskList from './components/TaskList/TaskList'
+import TaskNew from './components/TaskList/TaskNew'
+import Tasks from './pages/TasksPage/Tasks'
+import TaskSingle from './components/TaskList/TaskSingle'
 
 const NotFound = () => (
   <>
@@ -32,11 +36,37 @@ const router = createBrowserRouter([
       },
       {
         path: 'profile',
-        element: <ProfilePage />,
+        element: (
+          <IsPrivate>
+            <ProfilePage />
+          </IsPrivate>
+        ),
       },
       {
         path: 'tasks',
-        element: <TasksPage />
+        element: (
+          <IsPrivate>
+            <TasksPage />
+          </IsPrivate>
+        ),
+        children: [
+          {
+            path: 'list',
+            element: <TaskList />,
+          },
+          {
+            path: 'new',
+            element: <TaskNew />,
+          },
+        ],
+      },
+      {
+        path: 'tasks/:taskId',
+        element: (
+          <IsPrivate>
+            <TaskSingle />
+          </IsPrivate>
+        ),
       },
       {
         path: 'login',

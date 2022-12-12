@@ -55,7 +55,6 @@ function LoginPage() {
           <input
             type="email"
             name="email"
-            value={email}
             onChange={handleEmail}
             className="input input-bordered w-full max-w-xs"
           />
@@ -66,7 +65,6 @@ function LoginPage() {
           <input
             type="password"
             name="password"
-            value={password}
             onChange={handlePassword}
             className="input input-bordered w-full max-w-xs"
           />
@@ -83,9 +81,13 @@ function LoginPage() {
         <Link className="btn btn-outline btn-primary btn-block" to={'/signup'}>
           Sign Up
         </Link>
+        
+        {errorMessage && (
+          <div className="py-4">
+            <p className="alert shadow-lg">{errorMessage}</p>
+          </div>
+        )}
       </div>
-
-      {errorMessage && <p className="alert shadow-lg">{errorMessage}</p>}
     </div>
   )
 }

@@ -92,13 +92,13 @@ export default function HeaderNav() {
             </li>
             {!isLoggedIn && (
               <>
-              <li>
-                <NavLink to={'login'}>Login</NavLink>
-              </li>
-              <li>
-                <NavLink to={'signup'}>Signup</NavLink>
-              </li>
-            </>
+                <li>
+                  <NavLink to={'login'}>Login</NavLink>
+                </li>
+                <li>
+                  <NavLink to={'signup'}>Signup</NavLink>
+                </li>
+              </>
             )}
             {isLoggedIn && (
               <>
@@ -119,13 +119,22 @@ export default function HeaderNav() {
         </Link>
       </div>
       <div className="navbar-end">
-        {/* <input type="checkbox" className="toggle toggle-xs" dataChooseTheme /> */}
-        <button
-          className="btn btn-ghost btn-circle"
-          onClick={() => themeChange(true)}
-        >
-          <BiSun />
-        </button>
+        
+
+        <label className="swap swap-rotate">
+          <input type="checkbox" style={{ display: 'none' }} />
+          <div className="swap-on">
+            <div className="btn btn-ghost btn-circle">
+              <BiSun size={'1.25rem'} />
+            </div>
+          </div>
+          <div className="swap-off">
+            <div className="btn btn-ghost btn-circle">
+              <BiMoon size={'1.25rem'} />
+            </div>
+          </div>
+        </label>
+
         <button className="btn btn-ghost btn-circle">
           <div className="indicator">
             <svg

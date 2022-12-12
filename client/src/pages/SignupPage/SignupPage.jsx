@@ -95,9 +95,13 @@ function SignupPage() {
         <Link className="btn btn-outline btn-primary btn-block" to={'/login'}>
           Login
         </Link>
-      </div>
 
-      {errorMessage && <p className="alert shadow-lg">{errorMessage}</p>}
+        {errorMessage && (
+          <div className="py-4">
+            <p className="alert shadow-lg">{errorMessage}</p>
+          </div>
+        )}
+      </div>
     </div>
   )
 }

@@ -4,11 +4,16 @@ module.exports = {
   theme: {
     extend: {},
   },
-  plugins: [require('@tailwindcss/forms'), require('daisyui')],
+  plugins: [
+    require('@tailwindcss/forms'),
+    require('@tailwindcss/typography'),
+    require('daisyui'),
+  ],
   darkMode: 'class',
   daisyui: {
     themes: [
-      'light',
+      // 'dracula',
+      'winter',
       // 'dark',
       // 'coffee',
     ],
