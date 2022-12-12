@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { useContext, useEffect } from 'react'
-import { Link } from 'react-router-dom'
 import { AuthContext } from '../../context/auth.context'
 import apiService from '../../services/api.services'
 import TaskListItem from './TaskListItem'
@@ -15,7 +14,6 @@ export default function TaskList() {
         const userId = user._id
         const { data } = await apiService.getTasks(userId)
         setTasks(data)
-        console.log(data)
       } catch (err) {
         console.warn(err.message)
       }
@@ -28,7 +26,7 @@ export default function TaskList() {
     <>
       {!tasks && <EmptyTaskListAlert />}
 
-      <ul className="my-4 border rounded-lg p-2 border-primary">
+      <ul className="my-4 border rounded-lg p-2 border-primary-content">
         {tasks?.map((task) => (
           <TaskListItem key={task._id} {...task} />
         ))}

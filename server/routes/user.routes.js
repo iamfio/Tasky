@@ -45,7 +45,21 @@ router.get('/task', async (req, res) => {
   }
 })
 
-// /api/user/task - add new
+// /api/user/task/:taskId - DELETE Task by taskId
+router.delete('/task', async (req, res) => {
+  const {
+    taskId: { _id },
+  } = req.body
+
+  try {
+    await Task.findByIdAndDelete(_id)
+    res.status(200).json({ message: 'Task successfully deleted' })
+  } catch (err) {
+    res.status(400).json({ message: err.message })
+  }
+})
+
+// /api/user/task - add new Task
 router.post('/task', async (req, res) => {
   const { text, description, alertTime, user } = req.body
 

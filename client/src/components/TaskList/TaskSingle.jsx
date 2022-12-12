@@ -24,7 +24,7 @@ export default function TaskSingle() {
     }
     getTaskById(taskId)
   }, [])
-  
+
   return (
     <InnerLayout>
       <TaskListItem {...task} isSingle />

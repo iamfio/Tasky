@@ -17,6 +17,7 @@ import TaskList from './components/TaskList/TaskList'
 import TaskNew from './components/TaskList/TaskNew'
 import Tasks from './pages/TasksPage/Tasks'
 import TaskSingle from './components/TaskList/TaskSingle'
+import TaskEdit from './components/TaskList/TaskEdit'
 
 const NotFound = () => (
   <>
@@ -67,6 +68,12 @@ const router = createBrowserRouter([
             <TaskSingle />
           </IsPrivate>
         ),
+        children: [
+          { 
+            path: 'edit', 
+            element: <TaskEdit /> 
+          }
+        ],
       },
       {
         path: 'login',

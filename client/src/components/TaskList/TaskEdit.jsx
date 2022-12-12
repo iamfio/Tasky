@@ -1,10 +1,10 @@
-import { useContext, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../context/auth.context'
-import apiService from '../../services/api.services'
+import InnerLayout from '../Layout/InnerLayout'
 import TaskForm from './TaskForm'
 
-export default function TaskNew() {
+export default function TaskEdit() {
   const navigate = useNavigate()
   const { user } = useContext(AuthContext)
 
@@ -12,25 +12,10 @@ export default function TaskNew() {
   const [description, setDescription] = useState('')
   const [alertTime, setAlertTime] = useState('')
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-
-    try {
-      const { data } = await apiService.addTask({
-        text,
-        description,
-        alertTime,
-        user,
-      })
-      console.log(data)
-      return navigate('/tasks')
-    } catch (err) {
-      console.warn(err.message)
-    }
-  }
-
+  const handleSubmit = (e) => {}
   return (
-    <TaskForm
+    <InnerLayout>
+      <TaskForm
       text={text}
       setText={setText}
       description={description}
@@ -39,6 +24,6 @@ export default function TaskNew() {
       setAlertTime={setAlertTime}
       handleSubmit={handleSubmit}
     />
+    </InnerLayout>
   )
 }
-

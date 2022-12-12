@@ -41,6 +41,11 @@ class ApiService {
     })
   }
 
+  deleteTask = async (taskId) => {
+    console.log('api service: ', taskId)
+    return this.api.delete('/api/user/task', { data: { taskId } })
+  }
+
   // POST /api/examples
   createOne = async (requestBody) => {
     return this.api.post('/api/examples', requestBody)
