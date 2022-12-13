@@ -1,44 +1,28 @@
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../context/auth.context'
+import { TasksContext } from '../../context/tasks.context'
 import apiService from '../../services/api.services'
 import TaskForm from './TaskForm'
 
 export default function TaskNew() {
   const navigate = useNavigate()
   const { user } = useContext(AuthContext)
-
-  const [text, setText] = useState('')
-  const [description, setDescription] = useState('')
-  const [alertTime, setAlertTime] = useState('')
+  const { task } = useContext(TasksContext)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
 
     try {
-      const { data } = await apiService.addTask({
-        text,
-        description,
-        alertTime,
+      await apiService.addTask({
+        ...task,
         user,
       })
-      console.log(data)
-      return navigate('/tasks')
+      return navigate('/tasks/list')
     } catch (err) {
       console.warn(err.message)
     }
   }
 
-  return (
-    <TaskForm
-      text={text}
-      setText={setText}
-      description={description}
-      setDescription={setDescription}
-      alertTime={alertTime}
-      setAlertTime={setAlertTime}
-      handleSubmit={handleSubmit}
-    />
-  )
+  return <TaskForm handleSubmit={handleSubmit} />
 }
-

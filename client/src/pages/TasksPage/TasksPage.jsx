@@ -1,14 +1,8 @@
-import React, { useContext } from 'react'
-import { NavLink, Outlet, useNavigate } from 'react-router-dom'
-import { AuthContext } from '../../context/auth.context'
-import InnerLayout from '../../components/Layout/InnerLayout'
+import { NavLink, Outlet } from 'react-router-dom'
 
 export default function TasksPage() {
-  const navigate = useNavigate()
-  const { isLoggedIn, isLoading, user } = useContext(AuthContext)
-
   return (
-    <InnerLayout>
+    <>
       <h1 className="text-2xl font-bold mb-6">Task Management</h1>
 
       <ul className="tabs">
@@ -39,6 +33,6 @@ export default function TasksPage() {
       </ul>
 
       <Outlet />
-    </InnerLayout>
+    </>
   )
 }

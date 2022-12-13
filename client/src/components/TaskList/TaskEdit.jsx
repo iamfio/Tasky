@@ -14,8 +14,9 @@ export default function TaskEdit() {
 
   const handleSubmit = (e) => {}
   return (
-    <InnerLayout>
-      <TaskForm
+    <>
+    test
+    <TaskForm
       text={text}
       setText={setText}
       description={description}
@@ -24,6 +25,6 @@ export default function TaskEdit() {
       setAlertTime={setAlertTime}
       handleSubmit={handleSubmit}
     />
-    </InnerLayout>
+    </>
   )
 }

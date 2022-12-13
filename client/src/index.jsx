@@ -15,9 +15,8 @@ import './index.css'
 import TasksPage from './pages/TasksPage/TasksPage'
 import TaskList from './components/TaskList/TaskList'
 import TaskNew from './components/TaskList/TaskNew'
-import Tasks from './pages/TasksPage/Tasks'
 import TaskSingle from './components/TaskList/TaskSingle'
-import TaskEdit from './components/TaskList/TaskEdit'
+import { TasksProvider } from './context/tasks.context'
 
 const NotFound = () => (
   <>
@@ -54,27 +53,19 @@ const router = createBrowserRouter([
           {
             path: 'list',
             element: <TaskList />,
+            index: true,
           },
           {
             path: 'new',
             element: <TaskNew />,
           },
+          {
+            path: ':taskId',
+            element: <TaskSingle />,
+          },
         ],
       },
-      {
-        path: 'tasks/:taskId',
-        element: (
-          <IsPrivate>
-            <TaskSingle />
-          </IsPrivate>
-        ),
-        children: [
-          { 
-            path: 'edit', 
-            element: <TaskEdit /> 
-          }
-        ],
-      },
+
       {
         path: 'login',
         element: <LoginPage />,
@@ -95,6 +86,8 @@ const root = ReactDOM.createRoot(document.getElementById('root'))
 
 root.render(
   <AuthProviderWrapper>
-    <RouterProvider router={router} />
+    <TasksProvider>
+      <RouterProvider router={router} />
+    </TasksProvider>
   </AuthProviderWrapper>
 )

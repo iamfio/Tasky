@@ -29,6 +29,11 @@ class ApiService {
     return this.api.post('/api/user/task', requestBody)
   }
 
+  updateTask = async (requestBody) => {
+
+    return this.api.put('/api/user/task', requestBody)
+  }
+
   getTasks = async (userId) => {
     return this.api.get('/api/user/tasks', {
       params: { userId },

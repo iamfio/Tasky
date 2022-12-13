@@ -3,12 +3,10 @@ import { Link, useNavigate } from 'react-router-dom'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 
-import { confirmAlert } from 'react-confirm-alert' // Import
-import 'react-confirm-alert/src/react-confirm-alert.css' // Import css
-
-import apiService from '../../services/api.services'
-
+import { confirmAlert } from 'react-confirm-alert'
+import 'react-confirm-alert/src/react-confirm-alert.css'
 import TaskForm from './TaskForm'
+import apiService from '../../services/api.services'
 
 dayjs.extend(relativeTime)
 
@@ -21,13 +19,6 @@ export default function TaskListItem({
 }) {
   const navigate = useNavigate()
   const [edit, setEdit] = useState(false)
-
-  // TODO: Set this state in case of edit to handleSubmit on PUT endpoint
-  const [_text, setText] = useState('')
-  const [_description, setDescription] = useState('')
-  const [_alertTime, setAlertTime] = useState('')
-
-  const handleSubmit = (e) => {}
 
   const handleDelete = async () => {
     await apiService.deleteTask({ _id })
@@ -77,18 +68,8 @@ export default function TaskListItem({
                 >
                   Delete
                 </button>
-                {edit && (
-                  <TaskForm
-                    text={text}
-                    setText={setText}
-                    description={description}
-                    setDescription={setDescription}
-                    alertTime={alertTime}
-                    setAlertTime={setAlertTime}
-                    handleSubmit={handleSubmit}
-                    isEdit
-                  />
-                )}
+
+                {edit && <TaskForm taskId={_id} />}
               </div>
             )}
           </div>
