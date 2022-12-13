@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose')
+const Task = require('./Task.model')
 
-// TODO: Please make sure you edit the User model to whatever makes sense in this case
 const userSchema = new Schema(
   {
     username: {
@@ -22,7 +22,6 @@ const userSchema = new Schema(
     },
     name: {
       type: String,
-      required: [true, 'Full Name is required.'],
     },
     userpic: {
       type: String,
@@ -31,7 +30,6 @@ const userSchema = new Schema(
     tasks: [{ type: Schema.Types.ObjectId, ref: 'Task' }],
   },
   {
-    // this second object adds extra properties: `createdAt` and `updatedAt`
     timestamps: true,
   }
 )

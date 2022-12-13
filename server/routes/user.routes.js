@@ -1,3 +1,4 @@
+const { default: mongoose } = require('mongoose')
 const Task = require('../models/Task.model')
 const User = require('../models/User.model')
 
@@ -22,7 +23,6 @@ router.post('/', async (req, res) => {
 // /api/user/tasks - get all user's tasks
 router.get('/tasks', async (req, res) => {
   const { userId } = req.query
-  console.log('USER ID: ', userId)
 
   try {
     const user = await User.findById(userId).populate('tasks')
@@ -47,15 +47,19 @@ router.get('/task', async (req, res) => {
 
 // /api/user/task/:taskId - DELETE Task by taskId
 router.delete('/task', async (req, res) => {
-  const {
-    taskId: { taskId },
-  } = req.body
+  const { taskId, userId } = req.body
 
+  console.log('API: userId', userId, 'taskId', taskId)
   try {
+
+    const user = await User.findOne({_id: userId},)
+    user.tasks.splice(taskId, 1)
+    user.save()
     await Task.findByIdAndDelete(taskId)
+
     res.status(200).json({ message: 'Task successfully deleted' })
   } catch (err) {
-    res.status(400).json({ message: err.message })
+    res.status(400).json({ message: err })
   }
 })
 
