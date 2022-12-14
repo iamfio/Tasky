@@ -24,6 +24,7 @@ export default function TaskForm({ handleSubmit, isEdit }) {
             className="input input-bordered w-full my-2"
             value={'' || (isEdit && task?.text)}
             onChange={handleChange}
+            required
           />
 
           <textarea

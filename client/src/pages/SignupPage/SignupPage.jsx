@@ -60,6 +60,7 @@ function SignupPage() {
             value={username}
             onChange={handleName}
             className="input input-bordered w-full max-w-xs"
+            required
           />
 
           <label className="label">
@@ -71,6 +72,7 @@ function SignupPage() {
             value={email}
             onChange={handleEmail}
             className="input input-bordered w-full max-w-xs"
+            required
           />
 
           <label className="label">
@@ -82,6 +84,7 @@ function SignupPage() {
             value={password}
             onChange={handlePassword}
             className="input input-bordered w-full max-w-xs"
+            required
           />
 
           <div className="pt-6">
