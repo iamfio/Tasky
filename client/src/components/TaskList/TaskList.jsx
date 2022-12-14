@@ -1,10 +1,31 @@
+import { useState } from 'react'
+import { useEffect } from 'react'
 import { useContext } from 'react'
+import { AuthContext } from '../../context/auth.context'
 import { TasksContext } from '../../context/tasks.context'
+import apiService from '../../services/api.services'
 import { EmptyTaskListAlert } from '../Alert/EmptyListAlert'
 import TaskListItem from './TaskListItem'
 
 export default function TaskList() {
-  const { tasks } = useContext(TasksContext)
+  const { user } = useContext(AuthContext)
+  const [tasks, setTasks] = useState([])
+  // const { tasks } = useContext(TasksContext)
+
+  useEffect(() => {
+    const getTasks = async () => {
+      try {
+        const { data } = await apiService.getTasks(user?._id)
+        setTasks(data)
+      } catch (err) {
+        console.warn(err.message)
+      }
+    }
+
+    getTasks()
+    console.log('allTasks: ', tasks)
+  }, [user])
+
 
   return (
     <>

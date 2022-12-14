@@ -1,5 +1,9 @@
-import { Outlet } from "react-router-dom";
+import { Outlet } from 'react-router-dom'
 
 export default function Tasks() {
-  return <div><Outlet /></div>
+  return (
+    <div>
+      <Outlet />
+    </div>
+  )
 }

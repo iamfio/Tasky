@@ -21,7 +21,16 @@ class ApiService {
 
   // USER API
   updateUser = async (requestBody) => {
-    return this.api.post(`/api/user`, requestBody)
+    console.log('API SERVICE:', requestBody)
+    return this.api.put(`/api/user`, requestBody)
+  }
+
+  getCurrentUser = async (userId) => {
+    console.log('USER REQ API', userId)
+
+    return this.api.get('/api/user', {
+      params: { userId },
+    })
   }
 
   // TASKS API
@@ -30,7 +39,6 @@ class ApiService {
   }
 
   updateTask = async (requestBody) => {
-
     return this.api.put('/api/user/task', requestBody)
   }
 
@@ -46,7 +54,7 @@ class ApiService {
     })
   }
 
-  deleteTask = async ({taskId, user}) => {
+  deleteTask = async ({ taskId, user }) => {
     console.log('api service: ', taskId, user._id)
     const userId = user._id
     return this.api.delete('/api/user/task', { data: { taskId, userId } })

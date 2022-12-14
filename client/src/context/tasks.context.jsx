@@ -7,12 +7,13 @@ const TasksContext = createContext()
 
 function TasksProvider({ children }) {
   const { user } = useContext(AuthContext)
-  
+
   const [tasks, setTasks] = useState([])
   const [task, setTask] = useState(null)
 
   useEffect(() => {
     console.log('getTasks HIT')
+
     const getTasks = async () => {
       try {
         const { data } = await apiService.getTasks(user?._id)

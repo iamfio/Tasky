@@ -1,22 +1,30 @@
-const { default: mongoose } = require('mongoose')
 const Task = require('../models/Task.model')
 const User = require('../models/User.model')
 
 const router = require('express').Router()
 
-router.post('/', async (req, res) => {
-  // const { userId } = req.params
-  const { userpic, userId } = req.body
+router.get('/', async (req, res) => {
+  const { userId } = req.query
 
   try {
-    const user = await User.findByIdAndUpdate(userId, {
-      userpic,
-    })
-    res.status(200).json(user)
+    const currentUser = await User.findById(userId)
+    console.log(currentUser)
+    res.status(200).json(currentUser)
   } catch (err) {
-    res.status(400).json({
-      error: err,
-    })
+    res.status(400).json({ message: 'can not get user by id' })
+  }
+})
+
+// /api/user - UPDATE User
+router.put('/', async (req, res) => {
+  const { _id: userId, fullName, userpic } = req.body
+  const updateUser = { userpic, fullName }
+
+  try {
+    const user = await User.findByIdAndUpdate(userId, updateUser)
+    res.status(200).json({ message: 'User successfully updated', user })
+  } catch (err) {
+    res.status(400).json({ message: err.message })
   }
 })
 
@@ -33,7 +41,7 @@ router.get('/tasks', async (req, res) => {
   }
 })
 
-// /api/user/task/:taskId - get Task by taskId
+// /api/user/task/:taskId - GET Task by taskId
 router.get('/task', async (req, res) => {
   const { taskId } = req.query
 
@@ -51,8 +59,7 @@ router.delete('/task', async (req, res) => {
 
   console.log('API: userId', userId, 'taskId', taskId)
   try {
-
-    const user = await User.findOne({_id: userId},)
+    const user = await User.findOne({ _id: userId })
     user.tasks.splice(taskId, 1)
     user.save()
     await Task.findByIdAndDelete(taskId)
@@ -63,16 +70,28 @@ router.delete('/task', async (req, res) => {
   }
 })
 
-// /api/user/task/:taskId - UPDATE TASK
+router.put('/task/alarm', async (req, res) => {
+  const { taskId, alertTime, userId } = req.body
+
+  try {
+  } catch (err) {}
+})
+
+// /api/user/task/:taskId - UPDATE Task by taskId
 router.put('/task', async (req, res) => {
   const { taskId, text, description, alertTime } = req.body
 
+  console.log('ROUTE TASK UPDATE: taskId: ', taskId, ' alertTime: ', alertTime)
+
   try {
-    const task = await Task.findByIdAndUpdate(taskId, {
-      text,
-      description,
-      alertTime,
-    })
+    const task = await Task.findOneAndUpdate(
+      { _id: taskId },
+      {
+        text,
+        description,
+        alertTime,
+      }
+    )
     res.status(200).json({ message: 'Task successfully updated', task })
   } catch (err) {
     res.status(400).json({ message: err.message })

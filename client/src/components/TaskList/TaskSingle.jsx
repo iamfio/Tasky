@@ -11,17 +11,18 @@ import { TasksContext } from '../../context/tasks.context'
 import apiService from '../../services/api.services'
 
 import TaskForm from './TaskForm'
+import { AlarmContext } from '../../context/alarm.context'
 
 dayjs.extend(relativeTime)
 
 export default function TaskSingle() {
-  const { user } = useContext(AuthContext)
   const navigate = useNavigate()
-  const [edit, setEdit] = useState(false)
-
   const { taskId } = useParams()
 
+  const { user } = useContext(AuthContext)
   const { task, setTask } = useContext(TasksContext)
+
+  const [edit, setEdit] = useState(false)
 
   const handleDelete = async () => {
     await apiService.deleteTask({ taskId, user })
@@ -63,8 +64,12 @@ export default function TaskSingle() {
     getTaskById(taskId)
   }, [taskId, setTask])
 
+  console.log('TASK FROM TASKSINGLE: ', task);
   // Formatted alertTime string
-  const timeIn = dayjs(task?.alertTime).fromNow()
+  // const timeIn = dayjs(task?.alertTime).fromNow()
+
+  const { alarmTime } = useContext(AlarmContext)
+
 
   return (
     <div className="py-2 px-3 my-4 border rounded-lg shadow-sm hover:shadow-lg shadow-primary-content hover:shadow-primary-content flex w-full">
@@ -75,7 +80,7 @@ export default function TaskSingle() {
           </h3>
           <p className="text-sm">{task?.description}</p>
           <div className="pt-2">
-            <code className="text-xs text-gray-400">{timeIn}</code>
+            <code className="text-xs text-gray-400">{task?.alertTime || 'alarm not set'}</code>
           </div>
           <div className="flex-row ">
             <div className="action-buttons">

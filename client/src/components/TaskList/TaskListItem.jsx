@@ -7,6 +7,8 @@ import { confirmAlert } from 'react-confirm-alert'
 import 'react-confirm-alert/src/react-confirm-alert.css'
 import TaskForm from './TaskForm'
 import apiService from '../../services/api.services'
+import { useContext } from 'react'
+import { AlarmContext } from '../../context/alarm.context'
 
 dayjs.extend(relativeTime)
 
@@ -17,6 +19,8 @@ export default function TaskListItem({
   alertTime,
   isSingle,
 }) {
+  const { alarmTime } = useContext(AlarmContext)
+
   const navigate = useNavigate()
   const [edit, setEdit] = useState(false)
 
@@ -34,7 +38,7 @@ export default function TaskListItem({
   }
 
   // Formatted alertTime string
-  const timeIn = dayjs(alertTime).fromNow()
+  // const timeIn = dayjs(alertTime).fromNow()
 
   return (
     // {isSingle &&()}
@@ -45,9 +49,11 @@ export default function TaskListItem({
             {text}
           </h3>
           {isSingle && <p className="text-sm">{description}</p>}
+
           <div className="pt-2">
-            <code className="text-xs text-gray-400">{timeIn}</code>
+            <code className="text-xs text-gray-400">{alertTime || 'alarm not set'}</code>
           </div>
+
           <div className="flex-row ">
             {!isSingle && (
               <Link to={`/tasks/${_id}`}>
@@ -70,7 +76,12 @@ export default function TaskListItem({
                   Delete
                 </button>
 
-                {edit && <TaskForm taskId={_id} />}
+                {edit && (
+                  <>
+                    <div>Alert component</div>
+                    <TaskForm taskId={_id} />
+                  </>
+                )}
               </div>
             )}
           </div>

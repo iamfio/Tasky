@@ -1,5 +1,4 @@
 const { Schema, model } = require('mongoose')
-const Task = require('./Task.model')
 
 const userSchema = new Schema(
   {
@@ -20,7 +19,7 @@ const userSchema = new Schema(
       type: String,
       required: [true, 'Password is required.'],
     },
-    name: {
+    fullName: {
       type: String,
     },
     userpic: {

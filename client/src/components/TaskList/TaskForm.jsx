@@ -1,8 +1,11 @@
 import { useContext } from 'react'
 import { TasksContext } from '../../context/tasks.context'
+import AlarmInput from '../Alarm/AlarmInput'
 
 export default function TaskForm({ handleSubmit, isEdit }) {
   const { task, setTask } = useContext(TasksContext)
+
+  const taskId = task?._id
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -13,8 +16,10 @@ export default function TaskForm({ handleSubmit, isEdit }) {
     }))
   }
 
+  console.log('TASK FROM FORM', taskId)
+
   return (
-    <div className='w-full px-1'>
+    <div className="w-full px-1">
       <form onSubmit={handleSubmit}>
         <div className="form-control py-4">
           <input
@@ -35,19 +40,22 @@ export default function TaskForm({ handleSubmit, isEdit }) {
             onChange={handleChange}
           />
 
-          <input
+          {/* <input
             name="alertTime"
             type="datetime-local"
             className="input-bordered my-2"
             value={'' || (isEdit && task?.alertTime)}
             onChange={handleChange}
-          />
+          /> */}
 
           <button type="submit" className="btn  btn-primary my-2">
             {isEdit ? 'Update' : 'Add'}
           </button>
         </div>
       </form>
+      <div className='text-center'>
+        <AlarmInput taskId={taskId} />
+      </div>
     </div>
   )
 }

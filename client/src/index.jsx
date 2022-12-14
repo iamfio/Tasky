@@ -17,6 +17,7 @@ import TaskList from './components/TaskList/TaskList'
 import TaskNew from './components/TaskList/TaskNew'
 import TaskSingle from './components/TaskList/TaskSingle'
 import { TasksProvider } from './context/tasks.context'
+import { AlarmProvider } from './context/alarm.context'
 
 const NotFound = () => (
   <>
@@ -86,8 +87,10 @@ const root = ReactDOM.createRoot(document.getElementById('root'))
 
 root.render(
   <AuthProviderWrapper>
-    <TasksProvider>
-      <RouterProvider router={router} />
-    </TasksProvider>
+    <AlarmProvider>
+      <TasksProvider>
+        <RouterProvider router={router} />
+      </TasksProvider>
+    </AlarmProvider>
   </AuthProviderWrapper>
 )

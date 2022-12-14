@@ -11,7 +11,7 @@ const taskSchema = new Schema(
       type: String,
     },
     alertTime: {
-      type: Date,
+      type: String,
     },
     user: { type: Schema.Types.ObjectId, ref: 'User' },
   },
