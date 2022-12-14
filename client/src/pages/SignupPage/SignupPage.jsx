@@ -46,7 +46,7 @@ function SignupPage() {
   }
 
   return (
-    <>
+    <div className='flex justify-center items-center h-screen'>
       <div className=" form-control w-full max-w-xs">
         <h1>Sign Up</h1>
 
@@ -105,7 +105,7 @@ function SignupPage() {
           </div>
         )}
       </div>
-    </>
+    </div>
   )
 }
 

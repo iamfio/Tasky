@@ -40,12 +40,11 @@ export default function TaskSingle() {
     e.preventDefault()
 
     try {
-      const { data } = await apiService.updateTask({
+      await apiService.updateTask({
         taskId,
         ...task,
         user,
       })
-      console.log(data)
       return navigate('/tasks/list')
     } catch (err) {
       console.warn(err)
@@ -55,16 +54,14 @@ export default function TaskSingle() {
   useEffect(() => {
     const getTaskById = async (id) => {
       try {
-        const data = await apiService.getTaskById(id)
-        setTask(data.data)
+        const { data } = await apiService.getTaskById(id)
+        setTask(data)
       } catch (err) {
         console.warn(err.message)
       }
     }
     getTaskById(taskId)
-  }, [])
-
-  console.log(task)
+  }, [taskId, setTask])
 
   // Formatted alertTime string
   const timeIn = dayjs(task?.alertTime).fromNow()
