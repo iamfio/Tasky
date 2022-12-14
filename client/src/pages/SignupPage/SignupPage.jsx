@@ -6,19 +6,19 @@ import authService from '../../services/auth.service'
 function SignupPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [name, setName] = useState('')
+  const [username, setUsername] = useState('')
   const [errorMessage, setErrorMessage] = useState(undefined)
 
   const navigate = useNavigate()
 
   const handleEmail = (e) => setEmail(e.target.value)
   const handlePassword = (e) => setPassword(e.target.value)
-  const handleName = (e) => setName(e.target.value)
+  const handleName = (e) => setUsername(e.target.value)
 
   const handleSignupSubmit = (e) => {
     e.preventDefault()
     // Create an object representing the request body
-    const requestBody = { email, password, name }
+    const requestBody = { email, password, username }
 
     // Send a request to the server using axios
     /* 
@@ -46,11 +46,22 @@ function SignupPage() {
   }
 
   return (
-    <div className="flex justify-center items-center h-screen">
+    <>
       <div className=" form-control w-full max-w-xs">
         <h1>Sign Up</h1>
 
         <form onSubmit={handleSignupSubmit}>
+          <label className="label">
+            <span className="label-text">Username:</span>
+          </label>
+          <input
+            type="text"
+            name="username"
+            value={username}
+            onChange={handleName}
+            className="input input-bordered w-full max-w-xs"
+          />
+
           <label className="label">
             <span className="label-text">Email:</span>
           </label>
@@ -73,17 +84,6 @@ function SignupPage() {
             className="input input-bordered w-full max-w-xs"
           />
 
-          <label className="label">
-            <span className="label-text">Name:</span>
-          </label>
-          <input
-            type="text"
-            name="name"
-            value={name}
-            onChange={handleName}
-            className="input input-bordered w-full max-w-xs"
-          />
-
           <div className="pt-6">
             <button type="submit" className="btn btn-success btn-block">
               Sign Up
@@ -102,7 +102,7 @@ function SignupPage() {
           </div>
         )}
       </div>
-    </div>
+    </>
   )
 }
 

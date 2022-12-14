@@ -24,10 +24,7 @@ export default function TaskSingle() {
   const { task, setTask } = useContext(TasksContext)
 
   const handleDelete = async () => {
-    console.log('taskId', taskId)
-    console.log('TASK', task)
-
-    await apiService.deleteTask({ taskId })
+    await apiService.deleteTask({ taskId, user })
     return navigate('/tasks/list')
   }
 
@@ -41,8 +38,6 @@ export default function TaskSingle() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-
-    // console.log('handleSubmit', task)
 
     try {
       const { data } = await apiService.updateTask({
@@ -75,7 +70,7 @@ export default function TaskSingle() {
   const timeIn = dayjs(task?.alertTime).fromNow()
 
   return (
-    <li className="py-2 px-3 my-4 border rounded-lg shadow-sm hover:shadow-lg shadow-primary-content hover:shadow-primary-content flex">
+    <div className="py-2 px-3 my-4 border rounded-lg shadow-sm hover:shadow-lg shadow-primary-content hover:shadow-primary-content flex w-full">
       <div className="flex">
         <div className="flex-col">
           <h3 className="mb-1 text-lg text-primary font-bold capitalize">
@@ -116,7 +111,7 @@ export default function TaskSingle() {
           </div>
         </div>
       </div>
-    </li>
+    </div>
   )
 }
 

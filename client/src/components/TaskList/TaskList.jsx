@@ -10,7 +10,7 @@ export default function TaskList() {
     <>
       {!tasks && <EmptyTaskListAlert />}
 
-      <ul className="my-4 border rounded-lg p-2 border-primary-content">
+      <ul className="my-4 border rounded-lg p-1 border-primary-content w-full">
         {tasks?.map((task) => (
           <TaskListItem key={task._id} {...task} />
         ))}
@@ -18,5 +18,3 @@ export default function TaskList() {
     </>
   )
 }
-
-

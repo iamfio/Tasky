@@ -37,7 +37,8 @@ export default function TaskListItem({
   const timeIn = dayjs(alertTime).fromNow()
 
   return (
-    <li className="py-2 px-3 my-4 border rounded-lg shadow-sm hover:shadow-lg shadow-primary-content hover:shadow-primary-content flex">
+    // {isSingle &&()}
+    <li className="py-2 px-3 my-4 border rounded-lg shadow-sm hover:shadow-lg shadow-primary-content hover:shadow-primary-content">
       <div className="flex">
         <div className="flex-col">
           <h3 className="mb-1 text-lg text-primary font-bold capitalize">

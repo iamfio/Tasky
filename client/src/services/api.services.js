@@ -46,34 +46,10 @@ class ApiService {
     })
   }
 
-  deleteTask = async (taskId) => {
-    console.log('api service: ', taskId)
-    return this.api.delete('/api/user/task', { data: { taskId } })
-  }
-
-  // POST /api/examples
-  createOne = async (requestBody) => {
-    return this.api.post('/api/examples', requestBody)
-  }
-
-  // GET /api/examples
-  getAll = async () => {
-    return this.api.get('/api/examples')
-  }
-
-  // GET /api/examples/:id
-  getOne = async (id) => {
-    return this.api.get(`/api/examples/${id}`)
-  }
-
-  // PUT /api/examples/:id
-  updateOne = async (id, requestBody) => {
-    return this.api.put(`/api/examples/${id}`, requestBody)
-  }
-
-  // DELETE /api/examples/:id
-  deleteProject = async (id) => {
-    return this.api.delete(`/api/examples/${id}`)
+  deleteTask = async ({taskId, user}) => {
+    console.log('api service: ', taskId, user._id)
+    const userId = user._id
+    return this.api.delete('/api/user/task', { data: { taskId, userId } })
   }
 }
 
