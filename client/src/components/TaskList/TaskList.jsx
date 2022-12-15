@@ -2,9 +2,9 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import { useContext } from 'react'
 import { AuthContext } from '../../context/auth.context'
-import { TasksContext } from '../../context/tasks.context'
 import apiService from '../../services/api.services'
-import { EmptyTaskListAlert } from '../Alert/EmptyListAlert'
+
+import EmptyTaskListAlert from '../Alert/EmptyListAlert'
 import TaskListItem from './TaskListItem'
 
 export default function TaskList() {
@@ -25,10 +25,9 @@ export default function TaskList() {
     console.log('allTasks: ', tasks)
   }, [user])
 
-
   return (
     <>
-      {!tasks && <EmptyTaskListAlert />}
+      {!tasks.length && <EmptyTaskListAlert />}
 
       <ul className="my-4 p-1 w-full">
         {tasks?.map((task) => (

@@ -5,7 +5,7 @@ export default function MainLayout({ children }) {
     <>
       <HeaderNav />
 
-      <section className="min-h-screen bg-white dark:bg-gray-900">
+      <section className=" bg-white dark:bg-gray-900">
         <div className="container px-6 py-1 mx-auto">{children}</div>
       </section>
     </>
