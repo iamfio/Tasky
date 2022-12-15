@@ -3,7 +3,7 @@ import Quotes from '../../components/Quotes/Quotes'
 
 export default function TasksPage() {
   return (
-    <div className="flex flex-col items-center ">
+    <div className="flex flex-col items-center">
       <h1 className="text-2xl font-bold mb-6">Task Management</h1>
 
       <ul className="tabs">

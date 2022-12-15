@@ -12,10 +12,7 @@ module.exports = {
   darkMode: 'class',
   daisyui: {
     themes: [
-      // 'dracula',
-      'winter',
-      // 'dark',
-      // 'coffee',
+      'fantasy',
     ],
   },
 }

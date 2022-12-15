@@ -51,13 +51,17 @@ export default function TaskListItem({
           {isSingle && <p className="text-sm">{description}</p>}
 
           <div className="pt-2">
-            <code className="text-xs text-gray-400">{alertTime || 'alarm not set'}</code>
+            <code className="text-xs text-gray-400">
+              {alertTime || 'alarm not set'}
+            </code>
           </div>
 
           <div className="flex-row ">
             {!isSingle && (
               <Link to={`/tasks/${_id}`}>
-                <button className="btn btn-xs">more...</button>
+                <button className="btn btn-outline btn-success btn-xs">
+                  more...
+                </button>
               </Link>
             )}
             {isSingle && (
