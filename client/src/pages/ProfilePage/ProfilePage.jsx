@@ -7,7 +7,6 @@ import { BiMailSend } from 'react-icons/bi'
 import { AuthContext } from '../../context/auth.context'
 import apiService from '../../services/api.services'
 
-
 export default function ProfilePage() {
   const navigate = useNavigate()
   const { user } = useContext(AuthContext)
@@ -38,7 +37,7 @@ export default function ProfilePage() {
       const { data } = await axios.post(cdUrl, formData)
 
       // set new Pic
-      setCurrentUser({...currentUser, userpic: data.url})
+      setCurrentUser({ ...currentUser, userpic: data.url })
     } catch (err) {
       console.warn(err.message)
     }
@@ -68,8 +67,8 @@ export default function ProfilePage() {
 
       {/* IMAGE */}
 
-      <div className="">
-        <div className="mt-2 flex lg:mt-0 flex-col items-center mx-2">
+      <div className="w-full">
+        <div className="mt-2 flex flex-col items-center lg:mt-0 mx-2">
           {/* Profile Info */}
           <>
             <h1 className="text-2xl font-bold mb-6">User Profile</h1>
@@ -79,7 +78,9 @@ export default function ProfilePage() {
               alt={''}
             />
             <div>
-              <h3 className="text-base py-2">{currentUser?.fullName}</h3>
+              <h3 className="text-base capitalize py-2">
+                {currentUser?.fullName}
+              </h3>
               <h5 className="text-sm">@{currentUser?.username}</h5>
             </div>
             {/* Email */}
@@ -94,72 +95,77 @@ export default function ProfilePage() {
           </>
 
           {/* Profile Inputs */}
-          <div>
-            <form className="mt-10" onSubmit={handleSubmit}>
-              <div className="-mx-2 md:items-center md:flex">
-                <div className="flex-1 px-2">
-                  <label className="label">
-                    <div className="label-text">Full Name</div>
-                  </label>
-                  <input
-                    type="text"
-                    name="fullName"
-                    value={currentUser?.fullName || ''}
-                    placeholder={currentUser?.fullName || ''}
-                    onChange={(e) =>
-                      setCurrentUser({
-                        ...currentUser,
-                        fullName: e.target.value,
-                      })
-                    }
-                    className="input input-bordered w-full max-w-xs capitalize"
-                  />
+          <div className="flex flex-col justify-center items-center align-baseline w-96">
+            <form
+              className="mt-10 w-full text-center"
+              onSubmit={handleSubmit}
+            >
+              <div className="form-control py-4">
+                <div className="-mx-2 md:items-center w-full">
+                  <div className="">
+                    <label className="label ml-8">
+                      <div className="label-text">Full Name</div>
+                    </label>
+                    <input
+                      type="text"
+                      name="fullName"
+                      value={currentUser?.fullName || ''}
+                      placeholder={currentUser?.fullName || ''}
+                      onChange={(e) =>
+                        setCurrentUser({
+                          ...currentUser,
+                          fullName: e.target.value,
+                        })
+                      }
+                      className="input input-bordered w-full max-w-xs capitalize"
+                    />
+                  </div>
+
+                  <div className="mt-4 w-full">
+                    <label className="label ml-8">
+                      <div className="label-text">Username</div>
+                    </label>
+                    <input
+                      type="text"
+                      name="username"
+                      placeholder={`@${currentUser?.username}` || ''}
+                      className="input input-bordered w-full max-w-xs"
+                      disabled
+                    />
+                  </div>
+
+                  <div className="mt-4 md:mt-0">
+                    <label className="ml-8 label">
+                      <div className="label-text">Email address</div>
+                    </label>
+                    <input
+                      type="email"
+                      name="email"
+                      placeholder={currentUser?.email || ''}
+                      className="input input-bordered w-full max-w-xs"
+                      disabled
+                    />
+                  </div>
                 </div>
 
-                <div className="flex-1 px-2">
-                  <label className="label">
-                    <div className="label-text">Username</div>
-                  </label>
+                <div className="ml-12 mt-4 md:mt-0">
                   <input
-                    type="text"
-                    name="username"
-                    placeholder={`@${currentUser?.username}` || ''}
-                    className="input input-bordered w-full max-w-xs"
-                    disabled
-                  />
-                </div>
-
-                <div className="flex-1 px-2 mt-4 md:mt-0">
-                  <label className="label">
-                    <div className="label-text">Email address</div>
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    placeholder={currentUser?.email || ''}
-                    className="input input-bordered w-full max-w-xs"
-                    disabled
-                  />
-                </div>
-              </div>
-
-              <div className="flex-1 px-2 mt-4 ">
-                <input
-                  type="file"
-                  name="userpic"
-                  onChange={(e) => setUserpic(e.target.files[0])}
-                  className="block w-full text-sm text-primary bg-blend-darken py-4
+                    type="file"
+                    name="userpic"
+                    onChange={(e) => setUserpic(e.target.files[0])}
+                    className="block w-full text-sm text-primary bg-blend-darken py-4
                 file:mr-4 file:py-1 file:px-4
                 file:rounded-full file:border-0
                 file:text-sm file:font-semibold
                 file:bg-primary file:text-white"
-                />
-              </div>
+                  />
+                </div>
 
-              <div className="text-center py-4">
-                <button className="btn btn-wide btn-outline btn-primary">
-                  Update
-                </button>
+                <div className="text-center py-4">
+                  <button className="btn btn-wide btn-outline btn-primary">
+                    Update
+                  </button>
+                </div>
               </div>
             </form>
           </div>

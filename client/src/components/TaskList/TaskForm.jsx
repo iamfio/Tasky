@@ -19,7 +19,7 @@ export default function TaskForm({ handleSubmit, isEdit }) {
   console.log('TASK FROM FORM', taskId)
 
   return (
-    <>
+    <div className='w-full'>
       <form onSubmit={handleSubmit}>
         <div className="form-control py-4">
           <input
@@ -46,6 +46,6 @@ export default function TaskForm({ handleSubmit, isEdit }) {
       <div className="text-center">
         <AlarmInput taskId={taskId} />
       </div>
-    </>
+    </div>
   )
 }

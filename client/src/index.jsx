@@ -33,7 +33,11 @@ const router = createBrowserRouter([
     children: [
       {
         path: '',
-        element: <HomePage />,
+        element: (
+          <IsAnon>
+            <HomePage />
+          </IsAnon>
+        ),
       },
       {
         path: 'profile',

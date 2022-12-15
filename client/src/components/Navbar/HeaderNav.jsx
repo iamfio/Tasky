@@ -35,11 +35,11 @@ export default function HeaderNav() {
             tabIndex={0}
             className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
           >
-            <li>
-              <NavLink to={''}>Home</NavLink>
-            </li>
             {!isLoggedIn && (
               <>
+                <li>
+                  <NavLink to={''}>Home</NavLink>
+                </li>
                 <li>
                   <NavLink to={'login'}>Login</NavLink>
                 </li>
@@ -67,7 +67,7 @@ export default function HeaderNav() {
         </div>
       </div>
       <div className="navbar-center">
-        <Link to={'/'} className="btn btn-ghost normal-case text-xl">
+        <Link to={isLoggedIn ? 'tasks' : '/'} className="btn btn-ghost normal-case text-xl">
           Tasky
         </Link>
       </div>
