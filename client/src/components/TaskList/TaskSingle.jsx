@@ -65,46 +65,44 @@ export default function TaskSingle() {
   }, [taskId, setTask])
 
   return (
-    <div className="py-2 px-3 my-4 border rounded-lg shadow-sm hover:shadow-lg shadow-primary-content hover:shadow-primary-content flex w-full">
-      <div className="flex">
-        <div className="flex-col">
-          <h3 className="mb-1 text-lg text-primary font-bold capitalize">
-            {task?.text}
-          </h3>
-          <p className="text-sm">{task?.description}</p>
-          <div className="pt-2">
-            <code className="text-xs text-gray-400">{task?.alertTime || 'alarm not set'}</code>
-          </div>
-          <div className="flex-row ">
-            <div className="action-buttons">
-              <button
-                onClick={() => setEdit((current) => !current)}
-                className="btn btn-xs btn-outline my-2 mr-2"
-              >
-                Edit
-              </button>
+    <div className="flex flex-col w-full py-2 px-3 my-4 border rounded-lg shadow-sm hover:shadow-lg shadow-primary-content hover:shadow-primary-content ">
+      <h3 className="mb-1 text-lg text-primary font-bold capitalize">
+        {task?.text}
+      </h3>
+      <p className="text-sm">{task?.description}</p>
+      <div className="pt-2">
+        <code className="text-xs text-gray-400">
+          {task?.alertTime || 'alarm not set'}
+        </code>
+      </div>
+      <div className="flex-row ">
+        <div className="action-buttons">
+          <button
+            onClick={() => setEdit((current) => !current)}
+            className="btn btn-xs btn-outline my-2 mr-2"
+          >
+            Edit
+          </button>
 
-              <button
-                onClick={handleClickDelete}
-                className="btn btn-xs btn-outline btn-warning my-2"
-              >
-                Delete
-              </button>
-
-              {edit && (
-                <TaskForm
-                  taskId={taskId}
-                  text={task?.text}
-                  description={task?.description}
-                  alertTime={task?.alertTime}
-                  setTask={setTask}
-                  handleSubmit={handleSubmit}
-                  isEdit
-                />
-              )}
-            </div>
-          </div>
+          <button
+            onClick={handleClickDelete}
+            className="btn btn-xs btn-outline btn-warning my-2"
+          >
+            Delete
+          </button>
         </div>
+
+        {edit && (
+          <TaskForm
+            taskId={taskId}
+            text={task?.text}
+            description={task?.description}
+            alertTime={task?.alertTime}
+            setTask={setTask}
+            handleSubmit={handleSubmit}
+            isEdit
+          />
+        )}
       </div>
     </div>
   )
