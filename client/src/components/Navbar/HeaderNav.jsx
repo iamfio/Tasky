@@ -1,14 +1,9 @@
 import { Link, NavLink } from 'react-router-dom'
-import { themeChange } from 'theme-change'
-import { useContext, useEffect } from 'react'
+import { useContext } from 'react'
 import { AuthContext } from '../../context/auth.context'
 
 export default function HeaderNav() {
   const { isLoggedIn, logOutUser, user } = useContext(AuthContext)
-
-  useEffect(() => {
-    themeChange(false)
-  }, [])
 
   return (
     <div className="navbar bg-base-100">
