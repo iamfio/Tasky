@@ -10,7 +10,6 @@ import TaskListItem from './TaskListItem'
 export default function TaskList() {
   const { user } = useContext(AuthContext)
   const [tasks, setTasks] = useState([])
-  // const { tasks } = useContext(TasksContext)
 
   useEffect(() => {
     const getTasks = async () => {

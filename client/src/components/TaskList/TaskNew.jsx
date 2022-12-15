@@ -16,6 +16,7 @@ export default function TaskNew() {
     try {
       await apiService.addTask({
         ...task,
+        // text, description,
         user,
       })
       return navigate('/tasks/list')
