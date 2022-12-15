@@ -57,7 +57,7 @@ export default function ProfilePage() {
       console.warn(err)
     }
   }
-  
+
   return (
     <div className="flex justify-center">
       {/* <UserCard
@@ -87,7 +87,7 @@ export default function ProfilePage() {
               <div className="flex flex-row mx-auto items-end">
                 <BiMailSend size={20} />
                 <div className="text-sm mx-2 text-gray-700 truncate w-full dark:text-gray-400">
-                  {email}
+                  {currentUser?.email}
                 </div>
               </div>
             </div>

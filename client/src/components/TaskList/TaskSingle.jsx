@@ -64,13 +64,6 @@ export default function TaskSingle() {
     getTaskById(taskId)
   }, [taskId, setTask])
 
-  console.log('TASK FROM TASKSINGLE: ', task);
-  // Formatted alertTime string
-  // const timeIn = dayjs(task?.alertTime).fromNow()
-
-  const { alarmTime } = useContext(AlarmContext)
-
-
   return (
     <div className="py-2 px-3 my-4 border rounded-lg shadow-sm hover:shadow-lg shadow-primary-content hover:shadow-primary-content flex w-full">
       <div className="flex">
