@@ -42,7 +42,6 @@ export default function ProfilePage() {
       console.warn(err.message)
     }
   }
-  console.log('CD IMAGE URL', currentUser)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -96,10 +95,7 @@ export default function ProfilePage() {
 
           {/* Profile Inputs */}
           <div className="flex flex-col justify-center items-center align-baseline w-96">
-            <form
-              className="mt-10 w-full text-center"
-              onSubmit={handleSubmit}
-            >
+            <form className="mt-10 w-full text-center" onSubmit={handleSubmit}>
               <div className="form-control py-4">
                 <div className="-mx-2 md:items-center w-full">
                   <div className="">

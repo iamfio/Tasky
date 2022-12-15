@@ -2,20 +2,17 @@ import React, { useContext } from 'react'
 import { minutesNumber, hourNumber } from '../../utils/alarmUtils'
 import useSelect from '../../hooks/useSelect'
 import { AlarmContext } from '../../context/alarm.context'
+import { useNavigate } from 'react-router-dom'
 import './AlarmInput.css'
-import apiService from '../../services/api.services'
 
 export default function AlarmInput({ taskId }) {
+  const navigate = useNavigate()
+
   const [hour, setHour] = useSelect('Hour')
   const [minutes, setMinutes] = useSelect('Minutes')
   const [amPmOption, setAmPmOption] = useSelect('Am-Pm')
-  const {
-    setAlarmTime,
-    setTaskId,
-    pauseAlarm,
-    hasAlarm,
-    setHasAlarm,
-  } = useContext(AlarmContext)
+  const { setAlarmTime, setTaskId, pauseAlarm, hasAlarm, setHasAlarm } =
+    useContext(AlarmContext)
 
   const setAlarm = () => {
     if (hasAlarm) {
@@ -32,6 +29,8 @@ export default function AlarmInput({ taskId }) {
       setHasAlarm(true)
       setTaskId(taskId)
       setAlarmTime(`${hour}:${minutes} ${amPmOption}`)
+
+      return navigate('/tasks/list')
     }
   }
 

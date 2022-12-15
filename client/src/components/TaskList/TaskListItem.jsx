@@ -1,7 +1,5 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import dayjs from 'dayjs'
-import relativeTime from 'dayjs/plugin/relativeTime'
 
 import { confirmAlert } from 'react-confirm-alert'
 import 'react-confirm-alert/src/react-confirm-alert.css'
@@ -10,8 +8,6 @@ import apiService from '../../services/api.services'
 import { useContext } from 'react'
 import { AlarmContext } from '../../context/alarm.context'
 
-dayjs.extend(relativeTime)
-
 export default function TaskListItem({
   _id,
   text,
@@ -19,13 +15,16 @@ export default function TaskListItem({
   alertTime,
   isSingle,
 }) {
-  const { alarmTime } = useContext(AlarmContext)
+  const { isAlarm, setIsAlarm, setAlarmTime, pauseAlarm } =
+    useContext(AlarmContext)
 
   const navigate = useNavigate()
   const [edit, setEdit] = useState(false)
 
   const handleDelete = async () => {
     await apiService.deleteTask({ _id })
+    setAlarmTime('')
+
     return navigate('/tasks/list')
   }
 
@@ -37,11 +36,14 @@ export default function TaskListItem({
     })
   }
 
-  // Formatted alertTime string
-  // const timeIn = dayjs(alertTime).fromNow()
+  const handlePauseAlarm = () => {
+    pauseAlarm()
+    setIsAlarm(false)
+    setAlarmTime('')
+    window.location.reload(false)
+  }
 
   return (
-    // {isSingle &&()}
     <li className="py-2 px-3 my-4 border rounded-lg shadow-sm hover:shadow-lg shadow-primary-content hover:shadow-primary-content">
       <div className="flex">
         <div className="flex-col">
@@ -56,13 +58,23 @@ export default function TaskListItem({
             </code>
           </div>
 
-          <div className="flex-row ">
+          <div className="flex-row">
             {!isSingle && (
-              <Link to={`/tasks/${_id}`}>
-                <button className="btn btn-outline btn-success btn-xs">
-                  more...
-                </button>
-              </Link>
+              <>
+                <Link to={`/tasks/${_id}`}>
+                  <button className="btn btn-outline btn-success btn-xs">
+                    more...
+                  </button>
+                </Link>
+                {isAlarm && (
+                  <button
+                    className="btn btn-outline btn-error btn-xs ml-2"
+                    onClick={handlePauseAlarm}
+                  >
+                    Alarm !!!
+                  </button>
+                )}
+              </>
             )}
             {isSingle && (
               <div className="action-buttons">

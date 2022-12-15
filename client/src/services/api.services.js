@@ -21,13 +21,10 @@ class ApiService {
 
   // USER API
   updateUser = async (requestBody) => {
-    console.log('API SERVICE:', requestBody)
     return this.api.put(`/api/user`, requestBody)
   }
 
   getCurrentUser = async (userId) => {
-    console.log('USER REQ API', userId)
-
     return this.api.get('/api/user', {
       params: { userId },
     })
@@ -55,13 +52,11 @@ class ApiService {
   }
 
   deleteTask = async ({ taskId, user }) => {
-    console.log('api service: ', taskId, user._id)
     const userId = user._id
     return this.api.delete('/api/user/task', { data: { taskId, userId } })
   }
 }
 
-// Create one instance of the service
 const apiService = new ApiService()
 
 export default apiService

@@ -15,6 +15,7 @@ function AlarmProvider({ children }) {
   const [yearNow, setYearNow] = useState('')
   const [alarmTime, setAlarmTime] = useState('')
   const [hasAlarm, setHasAlarm] = useState(false)
+  const [isAlarm, setIsAlarm] = useState(false)
 
   const [taskId, setTaskId] = useState('')
 
@@ -48,25 +49,25 @@ function AlarmProvider({ children }) {
       setYearNow(year)
     }, 1000)
   }, [])
+  const updateTaskAlarm = async () => {
+    await apiService.updateTask({ taskId, alertTime: alarmTime })
+  }
 
   if (alarmTime && taskId) {
-    console.log('taskId from Alarm: ', taskId, 'AlertTime: ', alarmTime)
-
-    const updateTaskAlarm = async () => {
-      await apiService.updateTask({ taskId, alertTime: alarmTime })
-      setAlarmTime('')
-    }
     updateTaskAlarm()
   }
 
   if (alarmTime === `${hourDigital}:${minutesDigital} ${amPm}`) {
+    setIsAlarm(true)
     alarm.play()
     alarm.loop = true
+    setAlarmTime('')
   }
 
   const pauseAlarm = () => {
     alarm.pause()
     setAlarmTime('')
+    updateTaskAlarm()
   }
 
   return (
@@ -84,6 +85,8 @@ function AlarmProvider({ children }) {
         hasAlarm,
         setHasAlarm,
         setTaskId,
+        isAlarm,
+        setIsAlarm,
       }}
     >
       {children}

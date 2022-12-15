@@ -16,8 +16,6 @@ export default function TaskForm({ handleSubmit, isEdit }) {
     }))
   }
 
-  console.log('TASK FROM FORM', taskId)
-
   return (
     <div className='w-full'>
       <form onSubmit={handleSubmit}>

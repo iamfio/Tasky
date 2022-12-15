@@ -22,7 +22,6 @@ export default function TaskList() {
     }
 
     getTasks()
-    console.log('allTasks: ', tasks)
   }, [user])
 
   return (

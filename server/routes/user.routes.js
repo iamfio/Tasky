@@ -8,7 +8,6 @@ router.get('/', async (req, res) => {
 
   try {
     const currentUser = await User.findById(userId)
-    console.log(currentUser)
     res.status(200).json(currentUser)
   } catch (err) {
     res.status(400).json({ message: 'can not get user by id' })
@@ -57,7 +56,6 @@ router.get('/task', async (req, res) => {
 router.delete('/task', async (req, res) => {
   const { taskId, userId } = req.body
 
-  console.log('API: userId', userId, 'taskId', taskId)
   try {
     const user = await User.findOne({ _id: userId })
     user.tasks.splice(taskId, 1)
@@ -80,8 +78,6 @@ router.put('/task/alarm', async (req, res) => {
 // /api/user/task/:taskId - UPDATE Task by taskId
 router.put('/task', async (req, res) => {
   const { taskId, text, description, alertTime } = req.body
-
-  console.log('ROUTE TASK UPDATE: taskId: ', taskId, ' alertTime: ', alertTime)
 
   try {
     const task = await Task.findOneAndUpdate(

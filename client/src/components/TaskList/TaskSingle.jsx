@@ -1,8 +1,6 @@
 import { useState, useEffect, useContext } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import dayjs from 'dayjs'
 
-import relativeTime from 'dayjs/plugin/relativeTime'
 import { confirmAlert } from 'react-confirm-alert'
 import 'react-confirm-alert/src/react-confirm-alert.css'
 
@@ -11,9 +9,6 @@ import { TasksContext } from '../../context/tasks.context'
 import apiService from '../../services/api.services'
 
 import TaskForm from './TaskForm'
-import { AlarmContext } from '../../context/alarm.context'
-
-dayjs.extend(relativeTime)
 
 export default function TaskSingle() {
   const navigate = useNavigate()

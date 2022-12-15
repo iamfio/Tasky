@@ -17,12 +17,11 @@ export default function Quotes() {
   return (
     <>
       {quote && (
-        <div
-          className="border rounded-lg w-full text-center text-sm p-2 mt-4 cursor-pointer select-none"
-          // onClick={getRandomQuote}
-        >
-          <div className="font-serif antialiased mb-1">{quote?.quote}</div>
-          <div className="font-mono antialiased">- {quote?.author}</div>
+        <div className="border rounded-lg w-full text-center text-sm px-1 py-2 mt-4 cursor-wait select-none">
+          <div className="font-mono antialiased mb-1 px-2">{quote?.quote}</div>
+          <div className="font-mono text-xs antialiased mt-2">
+            - {quote?.author}
+          </div>
         </div>
       )}
     </>
