@@ -1,6 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import {
+  createBrowserRouter,
+  RouterProvider,
+  createMemoryRouter,
+  createHashRouter
+} from 'react-router-dom'
 
 import App from './App'
 import HomePage from './pages/HomePage/HomePage'
@@ -26,7 +31,7 @@ const NotFound = () => (
   </>
 )
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: '/',
     element: <App />,
@@ -38,6 +43,7 @@ const router = createBrowserRouter([
             <HomePage />
           </IsAnon>
         ),
+        index: true
       },
       {
         path: 'profile',
@@ -70,7 +76,6 @@ const router = createBrowserRouter([
           },
         ],
       },
-
       {
         path: 'login',
         element: <LoginPage />,
@@ -80,11 +85,7 @@ const router = createBrowserRouter([
         element: <SignupPage />,
       },
     ],
-  },
-  {
-    path: '*',
-    element: <NotFound />,
-  },
+  }
 ])
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
@@ -93,7 +94,9 @@ root.render(
   <AuthProviderWrapper>
     <AlarmProvider>
       <TasksProvider>
-        <RouterProvider router={router} />
+        {/* <MemoryRouter> */}
+          <RouterProvider router={router} />
+        {/* </MemoryRouter> */}
       </TasksProvider>
     </AlarmProvider>
   </AuthProviderWrapper>

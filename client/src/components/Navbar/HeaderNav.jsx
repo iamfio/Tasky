@@ -1,11 +1,10 @@
 import { Link, NavLink } from 'react-router-dom'
-import { BiSun, BiMoon } from 'react-icons/bi'
 import { themeChange } from 'theme-change'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect } from 'react'
 import { AuthContext } from '../../context/auth.context'
 
 export default function HeaderNav() {
-  const { isLoggedIn, isLoading, logOutUser, user } = useContext(AuthContext)
+  const { isLoggedIn, logOutUser, user } = useContext(AuthContext)
 
   useEffect(() => {
     themeChange(false)

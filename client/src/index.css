@@ -6,9 +6,18 @@
 
 body {
   font-family: 'Inter', sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   margin: 0 auto;
-  max-width: 32rem;
+}
+
+@media screen and (width < 599px) {
+  body {
+    width: 512px;
+    height: 800px;
+  }
+}
+
+@media screen and (width > 600px) {
+  body {
+    width: 960px;
+  }
 }
