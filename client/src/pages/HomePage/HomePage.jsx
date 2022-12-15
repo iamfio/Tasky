@@ -34,7 +34,7 @@ export default function HomePage() {
               <ul className="steps steps-vertical text-sm font-mono">
                 <li className="step step-primary">Register</li>
                 <li className="step step-secondary">Create and save Task</li>
-                <li className="step step-success">Set alarm</li>
+                <li className="step step-success">Edit Task to set alarm</li>
                 <li className="step  step-accent">Install Chrome Extension</li>
               </ul>
             </div>
@@ -54,7 +54,7 @@ export default function HomePage() {
                   </ul>
                 </li>
                 <li className="step step-success">
-                  Drop downloaded archive into screen
+                  Unpack ZIP and drop folder on screen
                 </li>
                 <li className="step  step-accent">Enjoy your Tasky</li>
               </ul>
